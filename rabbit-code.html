@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rabbit Button Fun</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #ffffff;
+            font-family: 'Fredoka One', cursive;
+            overflow: hidden;
+        }
+        #rabbitBtn {
+            background-color: pink;
+            border: none;
+            padding: 20px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #notRabbitBtn {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .rabbit-animation {
+            position: absolute;
+            width: 400px;
+            height: auto;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: jump 1s ease-in-out;
+        }
+        
+        @keyframes jump {
+            0% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -200px); }
+            100% { transform: translate(-50%, 0); }
+        }
+    </style>
+</head>
+<body>
+    <button id="rabbitBtn">I'm Rabbit</button>
+    <button id="notRabbitBtn">I'm Not Rabbit</button>
+
+    <script>
+        let clickCount = 0;
+        let baseSize = 100;
+        let rabbitBtn = document.getElementById("rabbitBtn");
+        let notRabbitBtn = document.getElementById("notRabbitBtn");
+
+        notRabbitBtn.addEventListener("click", function() {
+            clickCount++;
+            baseSize *= 1.5;
+            rabbitBtn.style.width = baseSize + "px";
+            rabbitBtn.style.height = baseSize + "px";
+            
+            if (clickCount >= 5) {
+                rabbitBtn.style.width = "100vw";
+                rabbitBtn.style.height = "100vh";
+                rabbitBtn.style.fontSize = "24px";
+                notRabbitBtn.style.display = "none";
+            }
+        });
+        
+        rabbitBtn.addEventListener("click", function() {
+            let rabbitImage = document.createElement("img");
+            rabbitImage.src = "https://i.pinimg.com/736x/2a/ee/7e/2aee7e082837e5f59bc01d726c46a1e6.jpg";
+            rabbitImage.classList.add("rabbit-animation");
+            rabbitImage.style.width = "600px";
+            document.body.appendChild(rabbitImage);
+            setTimeout(() => rabbitImage.remove(), 1000);
+        });
+    </script>
+</body>
+</html>
